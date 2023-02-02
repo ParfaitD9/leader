@@ -137,4 +137,6 @@ def allowed_file(filename: str):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    db.drop_tables((Call, Reminder, Lead))
+    db.create_tables((Call, Reminder, Lead))
+    app.run()
