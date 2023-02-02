@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Créé le</th>
+                <th scope="col">pour</th>
+                <th scope="col">Programmé</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rmd in remds %}
+            <tr id="{{rmd._id}}">
+                <td>{{rmd.created}}</td>
+                <td><a href="tel:{{rmd.lead.phone}}" target="_blank" rel="noopener noreferrer">{{rmd.lead.name}}</a>
+                </td>
+                <td>{{rmd.reminded}}</td>
+                <td>{{rmd.description}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page > 1%}
+            <li class="page-item"><a class="page-link" href="/reminders?page={{page-1}}">Previous</a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="#">{{page}}</a></li>
+            <li class="page-item"><a class="page-link" href="/reminders?page={{page+1}}">Next</a></li>
+        </ul>
+    </nav>
+</section>
+{% endblock %}

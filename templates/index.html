@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Nb. appels</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lead in leads %}
+            <tr id="tel-{{lead.phone}}">
+                <td>{{lead.name}}</td>
+                <td>{{lead.city}}</td>
+                <td>{{lead.call_count}}</td>
+                <td><a href="tel:{{lead.phone}}" target="_blank" rel="noopener noreferrer">{{lead.phone}}</a></td>
+                <td><i class="btn btn-telephone-plus-fill" title="Appelé" data-bs-toggle="modal"
+                        onclick="saveRow(event)" data-bs-target="#staticBackdrop">Appelé ?</i>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page > 1%}
+            <li class="page-item"><a class="page-link" href="/?page={{page-1}}">Previous</a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="#">{{page}}</a></li>
+            <li class="page-item"><a class="page-link" href="/?page={{page+1}}">Next</a></li>
+        </ul>
+    </nav>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Actions</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <button class="btn col-6 btn-primary m-auto" data-bs-toggle="modal" data-bs-target="#takeRdv">
+                        Saisir un rappel
+                    </button>
+                    <button class="btn col-6 btn-secondary m-auto" onclick="callIn2Week()">
+                        Rappeler dans deux semaines
+                    </button>
+                </div>
+                <div class="row">
+                    <button class="btn col-6 btn-danger m-auto" onclick="handleReject()">
+                        Refusé
+                    </button>
+                    <button class="btn col-6 btn-success m-auto" type="button" data-bs-toggle="modal"
+                        data-bs-target="#takeRdv">
+                        Prendre rendez-vous
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class=" modal fade" id="takeRdv" tabindex="-1" aria-labelledby="takeRdvLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="takeRdvLabel">Prendre rendez vous</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="addReminder(event)">
+                    <div class="form-group">
+                        <label for="leadRdvCreate">Client</label>
+                        <select name="lead" id="leadRdvCreate" class="form-control">
+                            {% for lead in leads %}
+                            <option value="{{lead.phone}}">{{lead}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reminded">Programmé</label>
+                        <input type="datetime-local" name="reminded" id="reminded" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" id="description" cols="45"
+                            rows="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="is_rdv">Rendez-vous confirmé ?</label>
+                        <input type="checkbox" name="is_rdv" id="is_rdv" class="form-check-input">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enregister</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">À</th>
+                <th scope="col">Issue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for call in calls %}
+            <tr id="{{call._id}}">
+                <td>{{call.timestamp}}</td>
+                <td><a href="tel:{{call.lead.phone}}" target="_blank" rel="noopener noreferrer">{{call.lead.name}}</a>
+                </td>
+                <td>{{call.ended}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page > 1%}
+            <li class="page-item"><a class="page-link" href="/calls?page={{page-1}}">Previous</a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="#">{{page}}</a></li>
+            <li class="page-item"><a class="page-link" href="/calls?page={{page+1}}">Next</a></li>
+        </ul>
+    </nav>
+</section>
+{% endblock %}
