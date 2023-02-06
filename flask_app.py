@@ -3,7 +3,8 @@ from datetime import datetime as dt
 from datetime import timedelta
 import peewee as pw
 
-from flask import Flask, flash, request, redirect, render_template, jsonify
+from flask import Flask, request, redirect, render_template, jsonify
+from dotenv import load_dotenv
 
 from settings import CURRENT_TIMEZONE
 from models import Lead, db, Call, Reminder
@@ -13,6 +14,8 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = {
     "csv",
 }
+
+load_dotenv()
 
 
 @app.route("/")
@@ -64,10 +67,7 @@ def callin2week(_id):
     return jsonify({"success": True})
 
 
-@app.route(
-    "/upload",
-    methods=["POST", "GET"],
-)
+@app.route("/upload", methods=["POST", "GET"])
 def upload():
     if request.method == "GET":
         return render_template("upload.html")

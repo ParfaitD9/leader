@@ -1,10 +1,11 @@
+import os
 from datetime import datetime as dt
 
 import peewee as pw
 
 from settings import CURRENT_TIMEZONE
 
-db = pw.SqliteDatabase("database.db3")
+db = pw.SqliteDatabase(os.getenv("DATABASE_PATH", "database.db3"))
 
 
 class BaseModel(pw.Model):
@@ -57,6 +58,7 @@ class Reminder(BaseModel):
     is_rdv = pw.BooleanField(default=False)
     description = pw.CharField(max_length=1024)
 
+    @staticmethod
     def load(**kwargs):
         lead: Lead = Lead.get_by_id(kwargs.get("lead"))
         print("Lead", lead.phone, "trouvé")
