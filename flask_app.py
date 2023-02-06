@@ -4,7 +4,6 @@ from datetime import timedelta
 import peewee as pw
 
 from flask import Flask, request, redirect, render_template, jsonify
-from dotenv import load_dotenv
 
 from settings import CURRENT_TIMEZONE
 from models import Lead, db, Call, Reminder
@@ -14,8 +13,6 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = {
     "csv",
 }
-
-load_dotenv()
 
 
 @app.route("/")
