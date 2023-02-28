@@ -1,10 +1,9 @@
-import os
-from pathlib import Path
 import csv
 from datetime import datetime as dt
 from datetime import timedelta
 
 import peewee as pw
+import dateparser
 
 # from dotenv import load_dotenv
 
@@ -139,12 +138,16 @@ def calls():
 @app.route("/dashboard")
 def dashboard():
     counts = {
-        dt.today()
-        - timedelta(days=i): Call.filter(
-            Call.timestamp.day == dt.today() - timedelta(days=i)
-        ).count()
+        (dt.today().date() - timedelta(days=i)).strftime("%Y-%m-%d"): 0
         for i in range(7)
     }
+
+    for day in counts:
+        for call in Call.select():
+            print(call)
+            if dateparser.parse(call.timestamp).date().strftime("%Y-%m-%d") == day:
+                counts[day] += 1
+
     return render_template("dashboard.html", counts=counts)
 
 
