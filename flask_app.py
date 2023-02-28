@@ -1,3 +1,5 @@
+import os
+from pathlib import Path
 import csv
 from datetime import datetime as dt
 from datetime import timedelta
@@ -6,7 +8,7 @@ import peewee as pw
 
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(os.path.join(Path(__file__).parent, ".env"))
 
 from flask import Flask, request, redirect, render_template, jsonify
 
