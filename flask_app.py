@@ -1,7 +1,12 @@
 import csv
 from datetime import datetime as dt
 from datetime import timedelta
+
 import peewee as pw
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from flask import Flask, request, redirect, render_template, jsonify
 
@@ -129,9 +134,21 @@ def calls():
     return render_template("calls.html", calls=appels, page=page)
 
 
+@app.route("/dashboard")
+def dashboard():
+    counts = {
+        dt.today()
+        - timedelta(days=i): Call.filter(
+            Call.timestamp.day == dt.today() - timedelta(days=i)
+        ).count()
+        for i in range(7)
+    }
+    return render_template("dashboard.html", counts=counts)
+
+
 def allowed_file(filename: str):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

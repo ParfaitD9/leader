@@ -1,39 +1,59 @@
 <!DOCTYPE html>
 <html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/static/css/bootstrap-icons.css" />
     <title>Leadeer by EE</title>
-</head>
+  </head>
 
-<body>
-    <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist"
-        style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
-        <li class="nav-item" role="presentation">
-            <a class="nav-link active rounded-5" id="home-tab2" href="/">Leads</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link rounded-5" id="profile-tab2" href="/calls">Appels</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link rounded-5" id="contact-tab2" href="/reminders">Rappels</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a href="/upload" class="nav-link rounded-5" id="contact-tab2">Ajouter leads</a>
-        </li>
+  <body>
+    <ul
+      class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm"
+      id="pillNav2"
+      role="tablist"
+      style="
+        --bs-nav-link-color: var(--bs-white);
+        --bs-nav-pills-link-active-color: var(--bs-primary);
+        --bs-nav-pills-link-active-bg: var(--bs-white);
+      "
+    >
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active rounded-5" id="home-tab2" href="/dashboard"
+          >Statistiques</a
+        >
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active rounded-5" id="home-tab2" href="/">Leads</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link rounded-5" id="profile-tab2" href="/calls">Appels</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link rounded-5" id="contact-tab2" href="/reminders"
+          >Rappels</a
+        >
+      </li>
+      <li class="nav-item" role="presentation">
+        <a href="/upload" class="nav-link rounded-5" id="contact-tab2"
+          >Ajouter leads</a
+        >
+      </li>
     </ul>
-    {% block content %}
-    {% endblock %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+    {% block content %} {% endblock %}
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/static/js/main.js"></script>
-</body>
-
+  </body>
 </html>
