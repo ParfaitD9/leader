@@ -94,7 +94,6 @@ def upload():
                     "postal",
                     "website",
                 ],
-                delimiter=";",
             )
 
             with db.atomic():
