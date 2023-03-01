@@ -33,7 +33,7 @@ class Lead(BaseModel):
     @staticmethod
     def load(**kwargs):
         phone = kwargs.get("phone", "")
-        phone = phone.split("+")[-1]
+        phone = phone.split("+")[-1] if "+" in phone else phone
         kwargs.update({"phone": phone})
         if "city" in kwargs and isinstance(kwargs.get("city"), str):
             city, _ = City.get_or_create(name=kwargs.get("city"))
