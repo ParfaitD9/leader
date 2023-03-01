@@ -86,18 +86,21 @@ def upload():
             reader = csv.DictReader(
                 stream,
                 [
-                    "name",
-                    "phone",
                     "address",
                     "city",
-                    "province",
                     "postal",
+                    "code",
+                    "country",
+                    "name",
+                    "phone",
                     "website",
                 ],
+                delimiter=",",
             )
 
             with db.atomic():
                 for lead in reader:
+                    print(lead)
                     try:
                         ld = Lead.load(**lead)
                     except pw.IntegrityError:
